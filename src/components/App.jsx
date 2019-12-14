@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { action1 } from "../redux/comments/actions";
+import "../assets/styles/App.scss";
+import Layout from "./Layout";
+import PostBox from "./PostBox";
+import Post from "./Post";
 
 class App extends Component {
   componentDidMount() {
@@ -9,7 +13,12 @@ class App extends Component {
 
   render() {
     console.log(this.props);
-    return <div>App</div>;
+    return (
+      <Layout>
+        <PostBox />
+        <Post />
+      </Layout>
+    );
   }
 }
 
