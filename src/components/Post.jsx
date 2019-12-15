@@ -4,7 +4,7 @@ class Post extends Component {
   render() {
     console.log("Post::::", this.props);
 
-    const { postId, author, content, imageUrl, comments, commentCreate } = this.props;
+    const { postId, author, content, imageUrl, comments, createComment } = this.props;
 
     return (
       <div>
@@ -23,13 +23,13 @@ class Post extends Component {
 
           {Boolean(comments.length) && (
             <div className="card-body p-2">
-              {comments.map(comment => (
+              {comments.map((comment) => (
                 <div
                   key={comment.id}
                   className="bg-light alert alert-secondary p-2 mb-1"
                   role="alert"
                 >
-                  <b>{comment.author}</b>
+                  <b>{comment.author} </b>
                   <span>{comment.content}</span>
                 </div>
               ))}
@@ -38,15 +38,15 @@ class Post extends Component {
 
           <div className="card-footer p-1">
             <input
-              ref={ref => {
+              ref={(ref) => {
                 this.commentTextRef = ref;
               }}
               type="text"
               placeholder="Escribe un comentario..."
               className="form-control nooutline"
-              onKeyPress={e => {
+              onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  commentCreate({
+                  createComment({
                     postId,
                     author,
                     content: this.commentTextRef.value,

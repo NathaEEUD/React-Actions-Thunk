@@ -12,16 +12,3 @@ export default handleActions(
   },
   [],
 );
-
-// export default (state = [], action) => {
-//   switch (action.type) {
-//     case "action_1":
-//       return [1, 2, 3];
-
-//     case "action_2":
-//       return [4, 5, 6];
-
-//     default:
-//       return state;
-//   }
-// };

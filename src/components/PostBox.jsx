@@ -13,7 +13,7 @@ function getBase64(file) {
 
 class PostBox extends Component {
   render() {
-    const { postCreate } = this.props;
+    const { createPost } = this.props;
 
     return (
       <form
@@ -27,7 +27,7 @@ class PostBox extends Component {
             image = await getBase64(file);
           }
 
-          postCreate({
+          createPost({
             image,
             content: this.textRef.value,
           });
