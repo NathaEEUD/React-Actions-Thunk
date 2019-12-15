@@ -1,13 +1,13 @@
 import { handleActions } from "redux-actions";
-import { COMMENT_ACTION_1, COMMENT_ACTION_2 } from "../actions";
+import { COMMENT_CREATE, COMMENT_GET_LIST } from "./actions";
 
 export default handleActions(
   {
-    ACTION_1: (state, action) => {
-      return [1, 2, 3];
+    [COMMENT_CREATE]: (state, action) => {
+      return [...state, action.payload];
     },
-    [COMMENT_ACTION_2]: (state, action) => {
-      return [4, 5, 6];
+    [COMMENT_GET_LIST]: (state, action) => {
+      return action.payload;
     },
   },
   [],

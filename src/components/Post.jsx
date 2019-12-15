@@ -1,16 +1,19 @@
 import React, { Component } from "react";
-import { comment } from "postcss-selector-parser";
 
 class Post extends Component {
   render() {
-    const { content, imageUrl, comments } = this.props;
+    console.log("Post::::", this.props);
+
+    const { postId, author, content, imageUrl, comments, commentCreate } = this.props;
 
     return (
       <div>
         <div className="card mb-5">
-          <div className="card-body card-body-border">
-            <div className="card-text">{content}</div>
-          </div>
+          {content && (
+            <div className="card-body card-body-border">
+              <div className="card-text">{content}</div>
+            </div>
+          )}
 
           {imageUrl && (
             <div className="card-body card-body-border">
@@ -41,6 +44,16 @@ class Post extends Component {
               type="text"
               placeholder="Escribe un comentario..."
               className="form-control nooutline"
+              onKeyPress={e => {
+                if (e.key === "Enter") {
+                  commentCreate({
+                    postId,
+                    author,
+                    content: this.commentTextRef.value,
+                  });
+                  this.commentTextRef.value = "";
+                }
+              }}
             />
           </div>
         </div>

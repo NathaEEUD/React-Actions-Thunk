@@ -1,22 +1,46 @@
 import React, { Component } from "react";
 
-class PostBox extends Component {
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  // };
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+    // reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+class PostBox extends Component {
   render() {
+    const { postCreate } = this.props;
+
     return (
       <form
-        onSubmit={e => {
+        onSubmit={async (e) => {
+          // https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined
           e.preventDefault();
+
+          let image = "";
+          if (this.imageRef.files.length > 0) {
+            const file = this.imageRef.files[0];
+            image = await getBase64(file);
+          }
+
+          postCreate({
+            image,
+            content: this.textRef.value,
+          });
+
+          this.textRef.value = "";
+          this.imageRef.value = "";
         }}
       >
         <div className="card border-light mb-3">
           <div className="card-header">Crear Publicación</div>
           <div className="card-body">
             <textarea
-              ref={ref => (this.textRef = ref)}
+              ref={(ref) => (this.textRef = ref)}
               placeholder="¿Qué estás pensando?"
               className="form-control nooutline"
             />
@@ -26,7 +50,7 @@ class PostBox extends Component {
             </label>
 
             <input
-              ref={ref => (this.imageRef = ref)}
+              ref={(ref) => (this.imageRef = ref)}
               type="file"
               id="photoUpload"
               className="form-control-file d-none"

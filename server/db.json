@@ -1,0 +1,16 @@
+{
+  "comments": [
+    {
+      "author": "Natha",
+      "content": "Second Comment",
+      "postId": 123,
+      "id": 1
+    }
+  ],
+  "posts": [
+    {
+      "content": "First Post",
+      "id": 123
+    }
+  ]
+}
